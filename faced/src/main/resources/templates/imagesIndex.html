@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh_CN"   xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<script type="text/javascript">
+
+    function show(input) {
+        var file = input.files[0];
+        if(/image\/\w+/.test(file.type)){
+            var reader = new FileReader()
+            // 图片读取成功回调函数
+            reader.readAsDataURL(file)
+            reader.onload = function(e) {
+                document.getElementById('img').src=e.target.result
+            }
+        } else {
+            alert("输入图片格式")
+        }
+    }
+
+
+</script>
+
+
+<form action="/output" method="post" enctype="multipart/form-data"  >
+    <div style="text-align: center">
+
+        <img id="img" name="img" src="" style="width: 300px; height: 300px; vertical-align: middle;" οnerrοr="this.style.display='none'" />
+    </div>
+    <div style="text-align: center">
+        <input type="file" name="file" id="file" onchange="show(this)" accept="image/*,video/*"  >
+    </div>
+
+    <div style="text-align: center">
+        <input type="submit" value="提交" style="height: 50px;width: 100px;" >
+    </div>
+</form>
+
+
+</body>
+</html>
